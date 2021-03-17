@@ -1,14 +1,40 @@
 public class ProblemSet13 {
+    public static void main(String[] args) {
+        int[] arr = {2,4,3,8,9};
 
-    public boolean groupSum(int start, int[] numbers, int target) {
-
+        System.out.println(groupSum6(1,arr,1));
     }
 
-    public boolean groupSum6(int start, int[] numbers, int target) {
-
+    public static boolean groupSum(int start, int[] numbers, int target) {
+        if(target == 0) {
+            return true;
+        }
+        if(start >= numbers.length) {
+            return false;
+        }
+        if(groupSum(start + 1, numbers, target - numbers[start])) {
+            return true;
+        }
+        return groupSum(start + 1, numbers, target);
     }
 
-    public boolean groupNoAdj(int start, int[] numbers, int target) {
+     public static boolean groupSum6(int start, int[] numbers, int target) {
+         if(start == numbers.length)
+         {
+             if(target == 0)
+                 return true;
+             return false;
+         }
+         if(numbers[start] == 6) {
+             return groupSum6(start + 1, numbers, target - numbers[start]);
+         }
+         if(groupSum6(start + 1, numbers, target - numbers[start])) {
+             return true;
+         }
+         return groupSum6(start + 1, numbers, target);
+    }
+
+    /*public boolean groupNoAdj(int start, int[] numbers, int target) {
 
     }
 
@@ -26,5 +52,5 @@ public class ProblemSet13 {
 
     public boolean splitOdd(int[] numbers) {
         
-    }
+    }*/
 }
