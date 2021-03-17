@@ -1,11 +1,11 @@
 public class ProblemSet13 {
-    public static void main(String[] args) {
-        int[] arr = {1,4,4,8};
+    /*public static void main(String[] args) {
+        int[] arr = {15};
 
-        System.out.println(groupSumClump(4,arr,14));
-    }
+        System.out.println(splitOdd(arr));
+    }*/
 
-    public static boolean groupSum(int start, int[] numbers, int target) {
+    public boolean groupSum(int start, int[] numbers, int target) {
         if(target == 0) {
             return true;
         }
@@ -18,7 +18,7 @@ public class ProblemSet13 {
         return groupSum(start + 1, numbers, target);
     }
 
-     public static boolean groupSum6(int start, int[] numbers, int target) {
+     public boolean groupSum6(int start, int[] numbers, int target) {
          if( start < 0 || start >= numbers.length)
          {
              if(target == 0) {
@@ -35,7 +35,7 @@ public class ProblemSet13 {
          return groupSum6(start + 1, numbers, target);
     }
 
-    public static boolean groupNoAdj(int start, int[] numbers, int target) {
+    public boolean groupNoAdj(int start, int[] numbers, int target) {
         if(target == 0) {
             return true;
         }
@@ -48,7 +48,7 @@ public class ProblemSet13 {
         return groupNoAdj(start + 1, numbers, target);
     }
 
-    public static boolean groupSum5(int start, int[] numbers, int target) {
+    public boolean groupSum5(int start, int[] numbers, int target) {
         if(start >= numbers.length || start < 0)
         {
             if(target == 0) {
@@ -69,7 +69,7 @@ public class ProblemSet13 {
         return groupSum5(start + 1, numbers, target);
     }
 
-    public static boolean groupSumClump(int start, int[] numbers, int target) {
+    public boolean groupSumClump(int start, int[] numbers, int target) {
 	if(start >= numbers.length || start < 0)
  	{
 		if(target == 0) {
@@ -86,11 +86,33 @@ public class ProblemSet13 {
  	return groupSumClump(i, numbers, target);
     }
 
-    /*public static boolean splitArray(int[] numbers) {
+    public  boolean splitArray(int[] numbers) {
+        return sidesAreEqual(numbers, 0, 0);
+    }
 
+    public  boolean sidesAreEqual(int[] numbers, int i, int balance)
+    {
+        if(i == numbers.length)
+            return (balance == 0);
+        if(sidesAreEqual(numbers, i + 1, balance + numbers[i]))
+            return true;
+        return sidesAreEqual(numbers, i + 1, balance - numbers[i]);
     }
 
     public boolean splitOdd(int[] numbers) {
-        
-    }*/
+        return splitOddHelper(0, numbers, 0, 0);
+    }
+
+    public boolean splitOddHelper(int start, int[] numbers, int mult, int odd) {
+        if(start >= numbers.length) {
+            return mult % 10 == 0 && odd % 2 == 1;
+        }
+        if(splitOddHelper(start+1, numbers, mult + numbers[start], odd)) {
+            return true;
+        }
+        if(splitOddHelper(start+1, numbers, mult, odd + numbers[start])) {
+            return true;
+        }
+        return false;
+    }
 }
